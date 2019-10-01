@@ -43,7 +43,7 @@ The neural network that I have used is highly inspired from Nvidia deep convolut
 
 Nvidia reference cnn architecture                                     |
 :-------------------------------------------------------------------: |
-![](.cnn-architecture-624x890.png)                                    |
+![](./cnn-architecture-624x890.png)                                    |
 
 Network consists of a normalization layer, followed by 5 convolutional layers, followed by 4 fully connected layers.
 
