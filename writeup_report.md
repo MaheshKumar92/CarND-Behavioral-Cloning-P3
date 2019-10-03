@@ -43,7 +43,7 @@ The neural network that I have used is highly inspired from Nvidia deep convolut
 
 Nvidia reference cnn architecture                                     |
 :-------------------------------------------------------------------: |
-![](./cnn-architecture-624x890.png)                                    |
+![](./examples/cnn-architecture-624x890.png)                          |
 
 Network consists of a normalization layer, followed by 5 convolutional layers, followed by 4 fully connected layers.
 
@@ -63,7 +63,7 @@ Training data was chosen to keep the vehicle driving on the road. I used a combi
 
 For details about how I created the training data, see the next section.
 
-### Model Architecture and Training Strategy
+### Architecture and Training Documentation
 
 #### 1. Solution Design Approach
 
@@ -87,9 +87,33 @@ The final model architecture (model.py lines 87-126) consisted of a normalizatio
 
 #### 3. Creation of the Training Set & Training Process
 
-To capture good driving behavior, I first recorded two laps on track one using center lane driving.
+To capture good driving behavior, I first recorded two laps on track one using center lane driving. Here is an example image of center lane driving:
+
+Example center lane driving                                     |
+:-------------------------------------------------------------: |
+![](./examples/center_original.png)                             |
+
+
 I then recorded the vehicle recovering from the left side and right sides of the road back to center so that the vehicle would learn to come back to center of the lane if by chance it goes towards the corner. This is very important for stable driving.
-To augment the data sat, I also flipped images and angles, this doubled the data size and generalized the data for both clock and anti-clock wise turning.
+
+To augment the data sat, I also flipped images and angles, this doubled the data size and generalized the data for both clock and anti-clock wise turning. This will help to get generalized data and prevent network to get baised over clock/anti-clock wise turns. Here is an example of fliped image.
+
+Example Original image                                     | Fliped Image                        
+:---------------------------------------------------------:|:-------------------------------------------------------:
+![](./examples/center_original.png)                        |![](./examples/center_fliped_image.png)
+
+
+Since the whole image was not required to decide how to drive, In preprocessing I croped the image to have one road. Here is an example:
+
+Example Original image                                     | Cropped Image                        
+:---------------------------------------------------------:|:-------------------------------------------------------:
+![](./examples/center_original.png)                        |![](./examples/cropped_image.png)
+
+
 I finally randomly shuffled the data set and put 20% of the data into a validation set. 
 
 I used this training data for training the model. The validation set helped determine if the model was over or under fitting. Number of epochs was 5, after which validation error was not changing much and I was able to drive the car. I used an adam optimizer so that manually training the learning rate wasn't necessary.
+
+
+### Simulation
+Car is able to drive on the track successfully.
