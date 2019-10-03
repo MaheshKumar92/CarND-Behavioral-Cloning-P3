@@ -94,7 +94,12 @@ Example center lane driving                                     |
 ![](./examples/center_original.png)                             |
 
 
-I then recorded the vehicle recovering from the left side and right sides of the road back to center so that the vehicle would learn to come back to center of the lane if by chance it goes towards the corner. This is very important for stable driving.
+I then recorded the vehicle recovering from the left side and right sides of the road back to center so that the vehicle would learn to come back to center of the lane if by chance it goes towards the corner. This is very important for stable driving. I used left and right camera images also to train the network to come back to center of the lane. (model.py line 52-54). For left I added 0.2 to steering angle and for right I subtracted 0.2. Here is an example of left and right camera images.
+
+Left Camera image                                           | Right Camera Image                        
+:----------------------------------------------------------:|:-------------------------------------------------------:
+![](./examples/left_camera_image.png)                       |![](./examples/right_camera_image.png)
+
 
 To augment the data sat, I also flipped images and angles, this doubled the data size and generalized the data for both clock and anti-clock wise turning. This will help to get generalized data and prevent network to get baised over clock/anti-clock wise turns. Here is an example of fliped image.
 
