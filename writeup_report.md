@@ -45,7 +45,7 @@ Nvidia reference cnn architecture                                     |
 :-------------------------------------------------------------------: |
 ![](./examples/cnn-architecture-624x890.png)                          |
 
-Network consists of a normalization layer, followed by 5 convolutional layers, followed by 4 fully connected layers.
+Network consists of a normalization layer, followed by 5 convolutional layers, followed by one dropout and faltten layer, followed by 4 fully connected layers.
 
 #### 2. Attempts to reduce overfitting in the model
 
@@ -67,23 +67,21 @@ For details about how I created the training data, see the next section.
 
 #### 1. Solution Design Approach
 
-The overall strategy for deriving a model architecture was to ...
+The overall strategy for deriving a model architecture was to use convolutional neural network with Keras. convolutional neural networks work very well with images as we have learned in previous lectures.
 
-My first step was to use a convolution neural network model similar to the ... I thought this model might be appropriate because ...
+My first step was to use a convolutional neural network model similar to the Lenet. I thought this model might be appropriate because it works very well for handwritten digit classification and traffic sign classification. But the Lenet did not work properly, car went outside the track soon. Then I decided to use Nvidia CNN which I mentioned earlier with minor modifications.
 
-In order to gauge how well the model was working, I split my image and steering angle data into a training and validation set. I found that my first model had a low mean squared error on the training set but a high mean squared error on the validation set. This implied that the model was overfitting. 
+In order to gauge how well the model was working, I split my image and steering angle data into a training and validation set. I found that my model had a low mean squared error on the training set but a high mean squared error on the validation set. This implied that the model was overfitting. 
 
-To combat the overfitting, I modified the model so that ...
+To combat the overfitting, I added dropout layer in Nvidia CNN.
 
-Then I ... 
-
-The final step was to run the simulator to see how well the car was driving around track one. There were a few spots where the vehicle fell off the track... to improve the driving behavior in these cases, I ....
+The final step was to run the simulator to see how well the car was driving around track one. There were a few spots where the vehicle fell off the track, to improve that I used data augmentation explained below. I collected data for both clock-wise and anti clock-wise driving. I also used left and right camera with modified steering angles to train the network to come back in the center of the lane.
 
 At the end of the process, the vehicle is able to drive autonomously around the track without leaving the road.
 
 #### 2. Final Model Architecture
 
-The final model architecture (model.py lines 87-126) consisted of a normalization layere followed by 5 convolution layers and then followed by 4 fully connected layeres.
+The final model architecture (model.py lines 87-126) consisted of a normalization layer followed by 5 convolution layers and then followed by 4 fully connected layers as described above with some minor changes like 1) input shape 160X320X3 2) added cropping layer 3) added dropout layer to avoid overfitting and 4) used elu instead of relu.
 
 #### 3. Creation of the Training Set & Training Process
 
@@ -98,10 +96,10 @@ I then recorded the vehicle recovering from the left side and right sides of the
 
 Left Camera image                                           | Right Camera Image                        
 :----------------------------------------------------------:|:-------------------------------------------------------:
-![](./examples/left_camera_image.png)                       |![](./examples/right_camera_image.png)
+![](./examples/left_camera.png)                             |![](./examples/right_camera.png)
 
 
-To augment the data sat, I also flipped images and angles, this doubled the data size and generalized the data for both clock and anti-clock wise turning. This will help to get generalized data and prevent network to get baised over clock/anti-clock wise turns. Here is an example of fliped image.
+Data Augmentation:- I also flipped images and angles, this doubled the data size and generalized the data for both clock and anti-clock wise turning. This will help to get generalized data and prevent network to get baised over clock/anti-clock wise turns. Here is an example of fliped image.
 
 Example Original image                                     | Fliped Image                        
 :---------------------------------------------------------:|:-------------------------------------------------------:
@@ -117,7 +115,7 @@ Example Original image                                     | Cropped Image
 
 I finally randomly shuffled the data set and put 20% of the data into a validation set. 
 
-I used this training data for training the model. The validation set helped determine if the model was over or under fitting. Number of epochs was 5, after which validation error was not changing much and I was able to drive the car. I used an adam optimizer so that manually training the learning rate wasn't necessary.
+I used this training data for training the model. The validation set helped determine if the model was over or under fitting. Number of epochs was 5, after which validation error was not changing much and I was able to drive the car. I used an adam optimizer so that manually tuning the learning rate wasn't necessary.
 
 
 ### Simulation
