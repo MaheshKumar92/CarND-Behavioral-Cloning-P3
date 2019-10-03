@@ -96,7 +96,7 @@ I then recorded the vehicle recovering from the left side and right sides of the
 
 Left Camera image                                           | Right Camera Image                        
 :----------------------------------------------------------:|:-------------------------------------------------------:
-![](./examples/left_camera.png)                             |![](./examples/right_camera.png)
+![](./examples/left_camera.jpg)                             |![](./examples/right_camera.jpg)
 
 
 Data Augmentation:- I also flipped images and angles, this doubled the data size and generalized the data for both clock and anti-clock wise turning. This will help to get generalized data and prevent network to get baised over clock/anti-clock wise turns. Here is an example of fliped image.
